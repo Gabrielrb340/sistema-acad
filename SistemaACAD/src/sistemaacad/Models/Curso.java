@@ -7,12 +7,16 @@ package sistemaacad.Models;
 
 import java.util.List;
 
+import com.j256.ormlite.field.DatabaseField;
+
 /**
  *
  * @author 11621095
  */
 public class Curso {
+    @DatabaseField(id=true)
     private Integer CodCurso;
+    @DatabaseField(canBeNull=false)
     private String Descricao;
     private List<Disciplina> Displinas;
     /**

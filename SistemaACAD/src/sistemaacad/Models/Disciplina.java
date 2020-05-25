@@ -9,12 +9,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.j256.ormlite.field.DatabaseField;
+
 /**
  *
  * @author 11621095
  */
 public class Disciplina {
+    @DatabaseField(id=true)
     private Integer CodigoDisciplina;
+    @DatabaseField(canBeNull=false)
     private Date CargaHoraria;
     private Map<Integer,String> PreRequisitos;
     private List<Turma> Turma;

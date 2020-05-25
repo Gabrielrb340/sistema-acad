@@ -5,14 +5,27 @@
  */
 package sistemaacad.Models;
 
+import com.j256.ormlite.field.DatabaseField;
+
 /**
  *
  * @author 11621095
  */
 public abstract class Pessoa {
+    @DatabaseField(id=true)
+	private int Id;
+    @DatabaseField(canBeNull=false)
     private String Nome;
+    @DatabaseField(canBeNull=false)
     private String Telefone;
+    @DatabaseField(canBeNull=false)
     private String Endereco;
+    public Pessoa() {}
+    public Pessoa(String nome,String telefone, String endereco) {
+    	this.Nome= nome;
+    	this.Telefone =telefone;
+    	this.Endereco=endereco;
+    }
 
     /**
      * @return the Nome
@@ -79,5 +92,11 @@ public abstract class Pessoa {
     	String nomevalido = "Jordan Eduardo Etc";
     	return nome.equals(nomevalido);
     }
+	public int getId() {
+		return Id;
+	}
+	public void setId(int id) {
+		Id = id;
+	}
     
 }

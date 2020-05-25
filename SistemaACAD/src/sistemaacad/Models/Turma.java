@@ -10,15 +10,21 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import com.j256.ormlite.field.DatabaseField;
+
 /**
  *
  * @author 11621095
  */
 public class Turma {
+    @DatabaseField(id=true)
     private Integer CodigoTurma;
+    @DatabaseField(canBeNull=false)
     private Date Ano;
+    @DatabaseField(canBeNull=false)
     private EnumTurno Turno;
     private Collection<Aluno> Aluno;
+    @DatabaseField(canBeNull=true)
     private int Vagas;
     /**
      * @return the CodigoTurma

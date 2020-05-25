@@ -8,11 +8,18 @@ package sistemaacad.Models;
 import java.util.Collection;
 import java.util.List;
 
+import com.j256.ormlite.field.DatabaseField;
+
 /**
  *
  * @author 11621095
  */
 public class Professor extends Pessoa{
+    @DatabaseField(foreign=true)
+	private int IdPessoa;
+    @DatabaseField(id=true)
+	private int IdProfessor;
+    @DatabaseField(canBeNull=true)
     private String Titulacao;
     private Collection<Curso> Curso;
     /**
@@ -50,5 +57,21 @@ public class Professor extends Pessoa{
     		}   		
     	}
     	return false;
-    }    
+    }
+
+	public int getIdProfessor() {
+		return IdProfessor;
+	}
+
+	public void setIdProfessor(int idProfessor) {
+		IdProfessor = idProfessor;
+	}
+
+	public int getIdPessoa() {
+		return IdPessoa;
+	}
+
+	public void setIdPessoa(int idPessoa) {
+		IdPessoa = idPessoa;
+	}    
 }

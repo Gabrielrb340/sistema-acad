@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Dao {
+public class DbConnection {
 
 	public static String status = "Não conectou...";
 	private final static String serverName = "localhost";
@@ -12,7 +12,7 @@ public class Dao {
 	private final static String  username = "root";
 	private final static  String  password = "123456";
 
-	public Dao() {
+	public DbConnection() {
 
 	}
 
@@ -47,7 +47,7 @@ public class Dao {
 
 	public static boolean FecharConexao() {
 		try {
-			Dao.getConnection().close();
+			DbConnection.getConnection().close();
 			return true;
 
 		} catch (SQLException e) {
@@ -57,7 +57,8 @@ public class Dao {
 
 	public static java.sql.Connection ReiniciarConexao() {
 		FecharConexao();
-		return Dao.getConnection();
+		return DbConnection.getConnection();
 
 	}
+	
 }
