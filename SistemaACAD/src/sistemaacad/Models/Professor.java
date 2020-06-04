@@ -8,70 +8,68 @@ package sistemaacad.Models;
 import java.util.Collection;
 import java.util.List;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  *
  * @author 11621095
  */
-public class Professor extends Pessoa{
-    @DatabaseField(foreign=true)
-	private int IdPessoa;
-    @DatabaseField(id=true)
-	private int IdProfessor;
-    @DatabaseField(canBeNull=true)
-    private String Titulacao;
-    private Collection<Curso> Curso;
-    /**
-     * @return the Titulacao
-     */
-    public String getTitulacao() {
-        return Titulacao;
-    }
+@DatabaseTable(tableName = "Professor")
+public class Professor extends Pessoa {
+	@DatabaseField(canBeNull = true)
+	private String Titulacao;
+	@ForeignCollectionField(eager = false)
+	private ForeignCollection<Curso> CursoForeignCollection;
+	private List<Curso> Curso;
 
-    /**
-     * @param Titulacao the Titulacao to set
-     */
-    public void setTitulacao(String Titulacao) {
-        this.Titulacao = Titulacao;
-    }
-
-    /**
-     * @return the Curso
-     */
-    public Collection<Curso> getCurso() {
-        return Curso;
-    }
-
-    /**
-     * @param Curso the Curso to set
-     */
-    public void setCurso(Collection<Curso> Curso) {
-        this.Curso = Curso;
-    }
-    
-    public boolean VerificarProfessorVinculadoCurso(int id_Curso) {
-    	for(Curso curso:this.Curso) {
-    		if(curso.getCodCurso() == id_Curso) {
-    			return true;
-    		}   		
-    	}
-    	return false;
-    }
-
-	public int getIdProfessor() {
-		return IdProfessor;
+	public List<Curso> getCurso() {
+		return Curso;
 	}
 
-	public void setIdProfessor(int idProfessor) {
-		IdProfessor = idProfessor;
+	public void setCurso(List<Curso> curso) {
+		Curso = curso;
 	}
 
-	public int getIdPessoa() {
-		return IdPessoa;
+	/**
+	 * @return the Titulacao
+	 */
+	public String getTitulacao() {
+		return Titulacao;
 	}
 
-	public void setIdPessoa(int idPessoa) {
-		IdPessoa = idPessoa;
-	}    
+	/**
+	 * @param Titulacao
+	 *            the Titulacao to set
+	 */
+	public void setTitulacao(String Titulacao) {
+		this.Titulacao = Titulacao;
+	}
+
+	/**
+	 * @return the Curso
+	 */
+	public Collection<Curso> CursoForeignCollection() {
+		return CursoForeignCollection;
+	}
+
+	/**
+	 * @param Curso
+	 *            the Curso to set
+	 */
+	public void CursoForeignCollection(ForeignCollection<Curso> Curso) {
+		this.CursoForeignCollection = Curso;
+	}
+
+	public boolean VerificarProfessorVinculadoCurso(int id_Curso) {
+		for (Curso curso : this.Curso) {
+			if (curso.getCodCurso() == id_Curso) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

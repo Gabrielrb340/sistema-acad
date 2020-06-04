@@ -10,5 +10,5 @@ package sistemaacad.Models;
  * @author 11621095
  */
 public enum PessoaEnum {
- Secretaria, Aluno,Professor   
+	Secretaria, Aluno, Professor
 }

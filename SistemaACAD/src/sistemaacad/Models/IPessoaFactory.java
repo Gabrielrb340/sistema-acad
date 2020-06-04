@@ -11,5 +11,5 @@ package sistemaacad.Models;
  */
 
 public interface IPessoaFactory<T> {
-    T InstanciaTipoPessoa(String TipoPessoa) ;
+	T InstanciaTipoPessoa(String TipoPessoa);
 }

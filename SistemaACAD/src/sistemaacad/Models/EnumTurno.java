@@ -10,8 +10,6 @@ package sistemaacad.Models;
  * @author 11621095
  */
 public enum EnumTurno {
-    DIA,
-    TARDE,
-    NOITE,
-    
+	DIA, TARDE, NOITE,
+
 }

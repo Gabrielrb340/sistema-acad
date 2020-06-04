@@ -12,8 +12,8 @@ import com.j256.ormlite.field.DatabaseField;
  * @author 11621095
  */
 public abstract class Pessoa {
-    @DatabaseField(id=true)
-	private int Id;
+	@DatabaseField(columnName="PessoaId", generatedId=true)
+	private int PessoaId;
     @DatabaseField(canBeNull=false)
     private String Nome;
     @DatabaseField(canBeNull=false)
@@ -89,14 +89,13 @@ public abstract class Pessoa {
         
     }
     public boolean ValidarNome(String nome) {
-    	String nomevalido = "Jordan Eduardo Etc";
-    	return nome.equals(nomevalido);
+    	return nome.equals(this.Nome);
     }
 	public int getId() {
-		return Id;
+		return PessoaId;
 	}
 	public void setId(int id) {
-		Id = id;
+		PessoaId = id;
 	}
     
 }
