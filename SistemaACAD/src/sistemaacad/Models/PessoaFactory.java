@@ -11,18 +11,18 @@ package sistemaacad.Models;
  */
 public class PessoaFactory implements IPessoaFactory<Pessoa> {
 
-    @Override
-    public Pessoa InstanciaTipoPessoa(String TipoPessoa) {
-        switch(TipoPessoa){
-            case "Professor":
-                return new Professor();
-            case "Aluno":
-                return new Aluno();
-            case "Secretaria":
-                return new Secretaria();
-            default:
-                throw new NullPointerException("Este tipo pessoa não existe");
-        }
-    }
-    
+	@Override
+	public Pessoa InstanciaTipoPessoa(String TipoPessoa) {
+		switch (TipoPessoa) {
+		case "Professor":
+			return new Professor();
+		case "Aluno":
+			return new Aluno();
+		case "Secretaria":
+			return new Secretaria();
+		default:
+			throw new NullPointerException("Este tipo pessoa não existe");
+		}
+	}
+
 }

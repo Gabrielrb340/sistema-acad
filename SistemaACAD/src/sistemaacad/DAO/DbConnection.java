@@ -7,10 +7,10 @@ import java.sql.SQLException;
 public class DbConnection {
 
 	public static String status = "Não conectou...";
-	private final static String serverName = "localhost";
-	private final static String mydatabase = "mysql";
+	private final static String serverName = "localhost:8080";
+	private final static String mydatabase = "lite";
 	private final static String  username = "root";
-	private final static  String  password = "123456";
+	private final static  String  password = "";
 
 	public DbConnection() {
 

@@ -7,58 +7,83 @@ package sistemaacad.Models;
 
 import java.util.List;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  *
  * @author 11621095
  */
+@DatabaseTable(tableName = "Curso")
 public class Curso {
-    @DatabaseField(id=true)
-    private Integer CodCurso;
-    @DatabaseField(canBeNull=false)
-    private String Descricao;
-    private List<Disciplina> Displinas;
-    /**
-     * @return the CodCurso
-     */
-    public Integer getCodCurso() {
-        return CodCurso;
-    }
+	@DatabaseField(columnName ="CodCurso", generatedId = true)
+	private Integer CodCurso;
+	@DatabaseField(canBeNull = false)
+	private String Descricao;
+	@ForeignCollectionField(eager = false)
+	private ForeignCollection<Aluno> Curso;
+	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "aluno_id")
+	private Aluno AlunoRelationship;
+	@ForeignCollectionField(eager = false)
+	private ForeignCollection<Disciplina> Displina;
+	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "professor_id")
+	private Professor ProfessorRelationship;
 
-    /**
-     * @param CodCurso the CodCurso to set
-     */
-    public void setCodCurso(Integer CodCurso) {
-        this.CodCurso = CodCurso;
-    }
+	public Aluno getAluno() {
+		return AlunoRelationship;
+	}
 
-    /**
-     * @return the Descricao
-     */
-    public String getDescricao() {
-        return Descricao;
-    }
+	public void setAluno(Aluno aluno) {
+		AlunoRelationship = aluno;
+	}
 
-    /**
-     * @param Descricao the Descricao to set
-     */
-    public void setDescricao(String Descricao) {
-        this.Descricao = Descricao;
-    }
+	// @DatabaseField(foreign=true)
+	// private List<Disciplina> Displina;
+	/**
+	 * @return the CodCurso
+	 */
+	public Integer getCodCurso() {
+		return CodCurso;
+	}
 
-    /**
-     * @return the Displinas
-     */
-    public List<Disciplina> getDisplinas() {
-        return Displinas;
-    }
+	/**
+	 * @param CodCurso
+	 *            the CodCurso to set
+	 */
+	public void setCodCurso(Integer CodCurso) {
+		this.CodCurso = CodCurso;
+	}
 
-    /**
-     * @param Displinas the Displinas to set
-     */
-    public void setDisplinas(List<Disciplina> Displinas) {
-        this.Displinas = Displinas;
-    }
-    
+	/**
+	 * @return the Descricao
+	 */
+	public String getDescricao() {
+		return Descricao;
+	}
+
+	/**
+	 * @param Descricao
+	 *            the Descricao to set
+	 */
+	public void setDescricao(String Descricao) {
+		this.Descricao = Descricao;
+	}
+
+	/**
+	 * @return the Displinas
+	 */
+	public ForeignCollection<Disciplina> getDisplinas() {
+		return Displina;
+	}
+
+	/**
+	 * @param Displinas
+	 *            the Displinas to set
+	 */
+	public void setDisplinas(ForeignCollection<Disciplina> Displinas) {
+		this.Displina = Displinas;
+	}
+
 }
