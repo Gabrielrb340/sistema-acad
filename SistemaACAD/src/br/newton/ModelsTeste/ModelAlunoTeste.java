@@ -25,6 +25,7 @@ public class ModelAlunoTeste {
 		Aluno aluno = new Aluno();
 		aluno.setNome("Jordan Não existe");
 		assertEquals(false,aluno.ConsultarAluno(aluno, "Nome"));
+		
 	}
 	
 }
