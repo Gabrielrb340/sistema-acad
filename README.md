@@ -1,4 +1,5 @@
 # sistema-acad
+Projeto academico 7° periodo (Engenharia de software II)
 ## Dependências
 [ORMLite](https://ormlite.com/)
 ## Tutorial
