@@ -5,6 +5,11 @@
  */
 package com.newtonPaiva.view;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import sistemaacad.Models.Aluno;
+
 /**
  *
  * @author Gustavo
@@ -43,6 +48,11 @@ public class TelaAluno extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bt_Salvar_al.setText("SALVAR");
+        bt_Salvar_al.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_Salvar_alActionPerformed(evt);
+            }
+        });
 
         bt_buscar_al.setText("BUSCAR");
 
@@ -132,6 +142,23 @@ public class TelaAluno extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bt_Salvar_alActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_Salvar_alActionPerformed
+        // TODO add your handling code here:
+        Aluno aluno = new Aluno();
+        aluno.setCurso(null);
+               
+        aluno.setAtivo(input_ativo.getText().equals(1) ? true : false);
+        aluno.setNome(input_nome.getText());
+        aluno.setEndereco(input_endereco.getText());
+        aluno.setTelefone(input_telefone.getText());
+        
+        try {
+            aluno.Salvar();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bt_Salvar_alActionPerformed
 
     /**
      * @param args the command line arguments

@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class DbConnection {
 
 	public static String status = "Não conectou...";
-	private final static String serverName = "localhost";
-	private final static String mydatabase = "mysql";
+	private final static String serverName = "localhost:8080";
+	private final static String mydatabase = "lite";
 	private final static String  username = "root";
 	private final static  String  password = "";
 
@@ -24,7 +24,7 @@ public class DbConnection {
 
 			String driverName = "com.mysql.jdbc.Driver";
 			Class.forName(driverName);
-			String url = "jdbc:mysql://localhost:3306/";
+			String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
 			connection = DriverManager.getConnection(url, username, password);
 			if (connection != null) {
 				status = ("STATUS--->Conectado com sucesso!");

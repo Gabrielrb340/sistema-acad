@@ -4,55 +4,49 @@
  * and open the template in the editor.
  */
 package sistemaacad.Models;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.print.DocFlavor.STRING;
-
-
+import sistemaacad.DAO.DBConnectionOrmLiteConnectionSource;
 import sistemaacad.DAO.DbConnection;;
 
 /**
  *
  * @author 11621095
  */
-@DatabaseTable(tableName = "Pessoa")
+@DatabaseTable(tableName = "Aluno")
 public class Aluno extends Pessoa {
-    @DatabaseField(foreign=true, canBeNull=false)
-    private boolean PessoaId;
-    @DatabaseField(canBeNull=false)
-	private String Nome;
-    private Curso Curso; 
-    @DatabaseField(canBeNull=false)
-    private boolean Ativo;
-    @DatabaseField(id=true)
-	private int Id;
 
-    public boolean isPessoaId() {
-		return PessoaId;
-	}
+	@ForeignCollectionField(eager = false)
+	private ForeignCollection<Curso> Curso;
+	@DatabaseField(canBeNull = false)
+	private boolean Ativo;
+	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "Curso_id")
+	private Curso CursoObject;
+	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "turma_id")
+	private Turma TurmaRelationship;
 
-	public int getId() {
-		return Id;
-	}
-    public Aluno() {
+	public Aluno() {
 		super();
 	}
 
-	public Aluno(int id,String nome, String endereco, String telefone, sistemaacad.Models.Curso curso, boolean ativo) {
-		super(nome,telefone,endereco);
-		Nome = nome;
+	public Aluno(int id, String nome, String endereco, String telefone, ForeignCollection<Curso> curso, boolean ativo) {
+		super(nome, telefone, endereco);
 		Curso = curso;
 		Ativo = ativo;
-		Id= id;
 	}
 
-    public boolean isAtivo() {
+	public boolean isAtivo() {
 		return Ativo;
 	}
 
@@ -61,75 +55,49 @@ public class Aluno extends Pessoa {
 	}
 
 	/**
-     * @return the Nome
-     */
-    public String getNome() {
-        return Nome;
-    }
+	 * @return the Curso
+	 */
+	public Collection<Curso> getCurso() {
+		return Curso;
+	}
 
-    /**
-     * @param Nome the Nome to set
-     */
-    public void setNome(String Nome) {
-        this.Nome = Nome;
-    }
+	/**
+	 * @param Curso
+	 *            the Curso to set
+	 */
+	public void setCurso(ForeignCollection<Curso> Curso) {
+		this.Curso = Curso;
+	}
 
-    /**
-     * @return the Curso
-     */
-    public Curso getCurso() {
-        return Curso;
-    }
-
-    /**
-     * @param Curso the Curso to set
-     */
-    public void setCurso(Curso Curso) {
-        this.Curso = Curso;
-    }
-    
-    public Boolean ConsultarAluno(Aluno aluno, String property) {
-    	Collection<Aluno> alunos = new ArrayList<Aluno>();
-    	alunos = MockUtils.ObterMockAlunos();
-    	boolean retorno = false;
-    	if(property.equals("Nome")) {
-    		for(Aluno item :alunos) {
-    			if(item.getNome().equals(aluno.getNome())) {
-    				retorno = true;
-    			}
-    		}
-    	}else if(property.equals(("telefone"))) {
-    		for(Aluno item :alunos) {
-    			if(item.getTelefone().equals(aluno.getTelefone())) {
-    				retorno = true;
-}
-    		}
-    	}
-    	else if(property.equals("endereco")) {
-    		for(Aluno item :alunos) {
-    			if(item.getEndereco().equals(aluno.getEndereco())) {
-    				retorno = true;
-    			}
-    		}
-    	}
-    	return retorno;
-    }
-//    public ArrayList<Aluno> ObterTodosAlunos(){
-//    	Collection<Aluno> alunos = new ArrayList<Aluno>();
-//    	try {
-//    	      Statement st =  Dao.getConnection().createStatement();
-//    	      ResultSet rs = st.executeQuery("SELECT * FROM ALUNO ");
-//    	      
-//    	      while(rs.next()) {
-//    	 //   	  alunos.add(new Aluno(rs.getString("No")))
-//    	      }
-//
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}finally {
-//			
-//		}
-//    	
-//    }
+	public Boolean ConsultarAluno(Aluno aluno, String property) throws SQLException {
+		Dao<Aluno, String> AlunoDao= DaoManager.createDao(DBConnectionOrmLiteConnectionSource.getConnectionSource(), Aluno.class);
+        Collection<Aluno> alunos= AlunoDao.queryForAll() ;	
+		boolean retorno = false;
+		if (property.equals("Nome")) {
+			for (Aluno item : alunos) {
+				if (item.getNome().equals(aluno.getNome())) {
+					retorno = true;
+				}
+			}
+		} else if (property.equals(("telefone"))) {
+			for (Aluno item : alunos) {
+				if (item.getTelefone().equals(aluno.getTelefone())) {
+					retorno = true;
+				}
+			}
+		} else if (property.equals("endereco")) {
+			for (Aluno item : alunos) {
+				if (item.getEndereco().equals(aluno.getEndereco())) {
+					retorno = true;
+				}
+			}
+		}
+		return retorno;
+	}
+        
+        public void Salvar() throws SQLException{
+            Dao<Aluno, String> AlunoDao= DaoManager.createDao(DBConnectionOrmLiteConnectionSource.getConnectionSource(), Aluno.class);
+            AlunoDao.create(this);
+        }
 
 }

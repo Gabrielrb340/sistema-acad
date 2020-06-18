@@ -5,6 +5,8 @@
  */
 package com.newtonPaiva.view;
 
+import sistemaacad.Models.Professor;
+
 /**
  *
  * @author Gustavo
@@ -33,7 +35,7 @@ public class TelaProfessor extends javax.swing.JFrame {
         label_nome_pf = new javax.swing.JLabel();
         input_nome_pf = new javax.swing.JTextField();
         label_titulacao_pf = new javax.swing.JLabel();
-        input_nome_pf1 = new javax.swing.JTextField();
+        input_titulacao_pf = new javax.swing.JTextField();
         label_telefone = new javax.swing.JLabel();
         input_telefone_pf = new javax.swing.JFormattedTextField();
         label_endereco = new javax.swing.JLabel();
@@ -50,6 +52,11 @@ public class TelaProfessor extends javax.swing.JFrame {
         });
 
         bt_Salvar_pf.setText("SALVAR");
+        bt_Salvar_pf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_Salvar_pfActionPerformed(evt);
+            }
+        });
 
         bt_buscar_pf.setText("BUSCAR");
 
@@ -86,7 +93,7 @@ public class TelaProfessor extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(label_titulacao_pf)
                                 .addGap(18, 18, 18)
-                                .addComponent(input_nome_pf1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(input_titulacao_pf, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(39, 39, 39)
                         .addComponent(bt_excluir_pf))
                     .addGroup(layout.createSequentialGroup()
@@ -124,7 +131,7 @@ public class TelaProfessor extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_titulacao_pf)
-                    .addComponent(input_nome_pf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(input_titulacao_pf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_Salvar_pf)
@@ -146,6 +153,19 @@ public class TelaProfessor extends javax.swing.JFrame {
         // TODO add your handling code here:
         new TelaInicial().setVisible(true);
     }//GEN-LAST:event_formWindowClosed
+
+    private void bt_Salvar_pfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_Salvar_pfActionPerformed
+        // TODO add your handling code here:
+        Professor prof =  new Professor();
+        
+        prof.setCurso(null);
+        prof.setEndereco(input_endereco_pf.getText());
+        prof.setNome(input_nome_pf.getText());
+        prof.setTitulacao(input_titulacao_pf.getText());
+        prof.setTelefone(input_telefone_pf.getText());
+        
+        prof.SalvarProf();
+    }//GEN-LAST:event_bt_Salvar_pfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,8 +208,8 @@ public class TelaProfessor extends javax.swing.JFrame {
     private javax.swing.JButton bt_excluir_pf;
     private javax.swing.JTextField input_endereco_pf;
     private javax.swing.JTextField input_nome_pf;
-    private javax.swing.JTextField input_nome_pf1;
     private javax.swing.JFormattedTextField input_telefone_pf;
+    private javax.swing.JTextField input_titulacao_pf;
     private javax.swing.JLabel label_endereco;
     private javax.swing.JLabel label_nome_pf;
     private javax.swing.JLabel label_telefone;

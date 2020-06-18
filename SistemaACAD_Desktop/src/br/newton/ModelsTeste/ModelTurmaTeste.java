@@ -2,8 +2,14 @@ package br.newton.ModelsTeste;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.SQLException;
+
 import org.junit.Test;
 
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+
+import sistemaacad.DAO.DBConnectionOrmLiteConnectionSource;
 import sistemaacad.Models.Aluno;
 import sistemaacad.Models.EnumTurno;
 import sistemaacad.Models.MockUtils;
@@ -12,39 +18,41 @@ import sistemaacad.Models.Turma;
 public class ModelTurmaTeste {
 
 	@Test 
-	public void VerificarAlunoCadastradoTurmaSucesso() {
-		Turma turma = new Turma();
-		turma.setCodigoTurma(2020);
-		turma.setTurno(EnumTurno.DIA);
-		turma.setAluno(MockUtils.ObterMockAlunos());
+	public void VerificarAlunoCadastradoTurmaSucesso() throws SQLException {
+		Dao<Aluno,String> AlunoDao = DaoManager.createDao(DBConnectionOrmLiteConnectionSource.getConnectionSource(), Aluno.class);
+		Dao<Turma,String> TurmaDao = DaoManager.createDao(DBConnectionOrmLiteConnectionSource.getConnectionSource(), Turma.class);
+		Turma turma = TurmaDao.queryForId("1");
+		turma.setAluno(AlunoDao.queryForEq("turma_id", "1"));
 		Aluno aluno = new Aluno();
-		aluno.setNome("Jordan Eduardo Etc");
+		aluno.setNome("Gabriel");
 		assertEquals(true,turma.VerificarAlunoCadastradoTurma(aluno, "Nome"));
-
 	}
 	@Test 
-	public void VerificarAlunoDisponivelParaCadastro() {
-		Turma turma = new Turma();
-		turma.setCodigoTurma(2020);
-		turma.setTurno(EnumTurno.DIA);
-		turma.setAluno(MockUtils.ObterMockAlunos());
+	public void VerificarAlunoDisponivelParaCadastro() throws SQLException {
+		Dao<Aluno,String> AlunoDao = DaoManager.createDao(DBConnectionOrmLiteConnectionSource.getConnectionSource(), Aluno.class);
+		Dao<Turma,String> TurmaDao = DaoManager.createDao(DBConnectionOrmLiteConnectionSource.getConnectionSource(), Turma.class);
+		Turma turma = TurmaDao.queryForId("1");
+		turma.setAluno(AlunoDao.queryForEq("turma_id", "1"));
 		Aluno aluno = new Aluno();
-		aluno.setNome("Victor Almeida Santos");
+		aluno.setNome("Luiz");
 		assertEquals(false,turma.VerificarAlunoCadastradoTurma(aluno, "Nome"));
 
 	}
 	@Test 
-	public void VerificarDisponibilidadeVagasTurmaLotadaSucesso() {
-		Turma turma = new Turma();
-		turma.setAluno(MockUtils.ObterMockAlunos());
-		turma.setVagas(1);
+	public void VerificarDisponibilidadeVagasTurmaLotadaSucesso() throws SQLException {
+		Dao<Aluno,String> AlunoDao = DaoManager.createDao(DBConnectionOrmLiteConnectionSource.getConnectionSource(), Aluno.class);
+		Dao<Turma,String> TurmaDao = DaoManager.createDao(DBConnectionOrmLiteConnectionSource.getConnectionSource(), Turma.class);
+		Turma turma = TurmaDao.queryForId("2");
+		turma.setAluno(AlunoDao.queryForEq("turma_id", "2"));
 		assertEquals(false,turma.VerificarDisponibilidadeVagasTurma());		
 	}
 	@Test 
-	public void VerificarDisponibilidadeVagasTurmaDisponibilidade() {
-		Turma turma = new Turma();
-		turma.setAluno(MockUtils.ObterMockAlunos());
-		turma.setVagas(30);
+	public void VerificarDisponibilidadeVagasTurmaDisponibilidade() throws SQLException {
+		Dao<Aluno,String> AlunoDao = DaoManager.createDao(DBConnectionOrmLiteConnectionSource.getConnectionSource(), Aluno.class);
+		Dao<Turma,String> TurmaDao = DaoManager.createDao(DBConnectionOrmLiteConnectionSource.getConnectionSource(), Turma.class);
+		Turma turma = TurmaDao.queryForId("1");
+		turma.setAluno(AlunoDao.queryForEq("turma_id", "1"));
+
 		assertEquals(true,turma.VerificarDisponibilidadeVagasTurma());		
 	}
 }
