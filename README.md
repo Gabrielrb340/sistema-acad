@@ -1,6 +1,6 @@
 # sistema-acad
 ## Dependencias
-ORMLite
+(ORMLite)[https://ormlite.com/]
 ## Tutorial
 1. Abrir o xammp
 - Criar um banco chamado **lite**(Evita necessidade de modificar o codigo)
