@@ -6,7 +6,7 @@ Projeto academico 7° periodo (Engenharia de software II)
 1. Abrir o [XAMPP](https://www.apachefriends.org/pt_br/index.html)
 - Criar um banco chamado **lite**(Evita necessidade de modificar o codigo) no PhpMyAdmin do XAMPP
 2. Abrir o arquivo SistemaACAD_Desktop/src/sistemaacad/SistemaACAD.java	
-- Execultar este arquivo , assim o metodo **main** deste arquivo para criar as tabelas no banco
+- Execultar este arquivo , assim o metodo **main** deste arquivo irá criar as tabelas no banco
 ## Integrantes
  - Jordan Eduardo 
  - Gabriel ribeiro
