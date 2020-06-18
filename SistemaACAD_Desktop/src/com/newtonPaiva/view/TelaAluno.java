@@ -8,6 +8,7 @@ package com.newtonPaiva.view;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import sistemaacad.Models.Aluno;
 
 /**
@@ -46,6 +47,11 @@ public class TelaAluno extends javax.swing.JFrame {
         input_telefone = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         bt_Salvar_al.setText("SALVAR");
         bt_Salvar_al.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +79,7 @@ public class TelaAluno extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        input_telefone.setToolTipText("Incluir o telefone");
+        input_telefone.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,10 +161,22 @@ public class TelaAluno extends javax.swing.JFrame {
         
         try {
             aluno.Salvar();
+            JOptionPane.showMessageDialog(null,"Aluno Cadastrado com Sucesso!");
+            input_nome.setText("");
+            input_curso.setText("");
+            input_endereco.setText("");
+            input_telefone.setText("");
+            input_ativo.setSelected(false);
         } catch (SQLException ex) {
             Logger.getLogger(TelaAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bt_Salvar_alActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        this.dispose();
+        new TelaInicial().setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

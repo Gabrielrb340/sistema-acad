@@ -5,6 +5,7 @@
  */
 package com.newtonPaiva.view;
 
+import javax.swing.JOptionPane;
 import sistemaacad.Models.Professor;
 
 /**
@@ -165,6 +166,11 @@ public class TelaProfessor extends javax.swing.JFrame {
         prof.setTelefone(input_telefone_pf.getText());
         
         prof.SalvarProf();
+        JOptionPane.showMessageDialog(null,"Professor Cadastrado com Sucesso!");
+        input_endereco_pf.setText("");
+        input_nome_pf.setText("");
+        input_telefone_pf.setText("");
+        input_titulacao_pf.setText("");
     }//GEN-LAST:event_bt_Salvar_pfActionPerformed
 
     /**
