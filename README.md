@@ -1,5 +1,5 @@
 # sistema-acad
-## Dependencias
+## Dependências
 [ORMLite](https://ormlite.com/)
 ## Tutorial
 1. Abrir o xammp
