@@ -10,4 +10,4 @@ Projeto academico 7° periodo (Engenharia de software II)
 ## Integrantes
  - Jordan Eduardo 
  - Gabriel ribeiro
- - Luiz Felipe
+ - Luiz Gustavo
